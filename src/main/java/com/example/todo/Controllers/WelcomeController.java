@@ -14,7 +14,6 @@ public class WelcomeController {
     }
     @RequestMapping("/todos")
     public String showTodos(){
-        System.out.println("Todo page par jana chahta hu ");
         return "Todos";
     }
 }

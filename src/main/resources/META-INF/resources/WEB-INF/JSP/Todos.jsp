@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/addTodo">Add Todo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/add-todo">Add Todo</a></li>
                 </ul>
             </div>
         </div>
@@ -26,7 +26,7 @@
 
         <!-- Add Todo Button -->
         <div class="mb-3">
-            <a href="/addTodo" class="btn btn-success">+ Add Todo</a>
+            <a href="/add-todo" class="btn btn-success">+ Add Todo</a>
         </div>
 
         <!-- Todo Table -->
@@ -34,7 +34,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>Description</th>
-                    <th>Author</th>
+                    <th>Username</th>
                     <th>Target Date</th>
                     <th>Completed?</th>
                     <th>Actions</th>
