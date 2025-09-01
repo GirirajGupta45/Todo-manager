@@ -44,11 +44,11 @@
                 <c:forEach var="todo" items="${todos}">
                     <tr>
                         <td>${todo.description}</td>
-                        <td>${todo.author}</td>
-                        <td><fmt:formatDate value="${todo.targetDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${todo.username}</td>
+                       <td>${todo.targetDate.toString()}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${todo.completed}">
+                                <c:when test="${todo.done}">
                                     ✅ Yes
                                 </c:when>
                                 <c:otherwise>
@@ -57,8 +57,8 @@
                             </c:choose>
                         </td>
                         <td>
-                            <a href="/updateTodo/${todo.id}" class="btn btn-primary btn-sm">Update</a>
-                            <a href="/deleteTodo/${todo.id}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="delete-todo?id=${todo.id}" class="btn btn-primary btn-sm">Update</a>
+                            <a href="update-todo?id=${todo.id}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>

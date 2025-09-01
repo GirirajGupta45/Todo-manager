@@ -89,9 +89,7 @@
 <body>
     <div class="todo-form">
         <h2>Add New Todo</h2>
-        <form:form method="POST" modelAttribute="todo" action="#">
-
-
+        <form:form method="POST" modelAttribute="todo" action="/add-todo">
 
 
             <!-- Todo Description -->
@@ -103,8 +101,6 @@
             <form:label path="targetDate">Due Date:</form:label>
             <form:input path="targetDate" type="date"/>
             <form:errors path="targetDate" cssClass="error"/>
-
-
 
             <!-- Submit Button -->
             <button type="submit">Add Todo</button>

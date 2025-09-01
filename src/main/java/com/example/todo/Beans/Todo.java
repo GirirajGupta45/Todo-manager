@@ -9,14 +9,14 @@ import jakarta.persistence.Id;
 public class Todo {
     @Id
     @GeneratedValue
-    private int ID;
+    private int id;
     private String Description;
     private String Username;
     private LocalDate targetDate;
     private boolean done;
 
     public Todo(int ID, String description, String username, LocalDate targetDate, boolean done) {
-        this.ID = ID;
+        this.id = ID;
         Description = description;
         Username = username;
         this.targetDate = targetDate;
@@ -26,12 +26,13 @@ public class Todo {
     public Todo() {
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -69,7 +70,7 @@ public class Todo {
     @Override
     public String toString() {
         return "Todo{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", Description='" + Description + '\'' +
                 ", Username='" + Username + '\'' +
                 ", targetDate=" + targetDate +
