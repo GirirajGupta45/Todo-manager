@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("name")
 @Controller
 public class WelcomeController {
-
     @RequestMapping("/")
     public String welcome(ModelMap model) {
         model.addAttribute("name","Giriraj Gupta");
