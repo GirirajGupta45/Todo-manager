@@ -1,24 +1,31 @@
 package com.example.todo.Beans;
 
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Todo {
     @Id
     @GeneratedValue
     private int id;
-    private String Description;
-    private String Username;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
     private LocalDate targetDate;
     private boolean done;
 
     public Todo(int ID, String description, String username, LocalDate targetDate, boolean done) {
         this.id = ID;
-        Description = description;
-        Username = username;
+        this.description = description;
+        this.username = username;
         this.targetDate = targetDate;
         this.done = done;
     }
@@ -36,19 +43,19 @@ public class Todo {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public LocalDate getTargetDate() {
@@ -71,8 +78,8 @@ public class Todo {
     public String toString() {
         return "Todo{" +
                 "ID=" + id +
-                ", Description='" + Description + '\'' +
-                ", Username='" + Username + '\'' +
+                ", Description='" + description + '\'' +
+                ", Username='" + username + '\'' +
                 ", targetDate=" + targetDate +
                 ", done=" + done +
                 '}';

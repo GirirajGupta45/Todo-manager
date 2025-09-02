@@ -57,8 +57,8 @@
                             </c:choose>
                         </td>
                         <td>
-                            <a href="delete-todo?id=${todo.id}" class="btn btn-primary btn-sm">Update</a>
-                            <a href="update-todo?id=${todo.id}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="update-todo?id=${todo.id}" class="btn btn-primary btn-sm">Update</a>
+                            <a href="delete-todo?id=${todo.id}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>

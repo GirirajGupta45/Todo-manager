@@ -75,6 +75,13 @@
         background-color: #218838;
     }
 
+    .checkbox-group {
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
     .error {
         color: red;
         font-size: 0.85em;
@@ -83,14 +90,11 @@
         display: block;
     }
 </style>
-
-
 </head>
 <body>
     <div class="todo-form">
-        <h2>Add New Todo</h2>
-        <form:form method="POST" modelAttribute="todo" action="/add-todo">
-
+        <h2>Enter Todo Details</h2>
+        <form:form method="POST" modelAttribute="todo" >
 
             <!-- Todo Description -->
             <form:label path="description">Description:</form:label>
@@ -101,9 +105,18 @@
             <form:label path="targetDate">Due Date:</form:label>
             <form:input path="targetDate" type="date"/>
             <form:errors path="targetDate" cssClass="error"/>
+            <!-- Mark as Completed -->
+            <div style="margin-bottom: 18px; display: flex; align-items: center;">
+                <form:checkbox path="done" id="doneCheckbox" style="width: 18px; height: 18px;"/>
+                <label for="doneCheckbox" style="margin-left: 10px; font-weight: 500; color: #555; font-size: 0.95em;">
+                    Mark as Completed
+                </label>
+            </div>
+
+            <form:errors path="done" cssClass="error"/>
 
             <!-- Submit Button -->
-            <button type="submit">Add Todo</button>
+              <button type="submit">Submit</button>
         </form:form>
     </div>
 </body>
