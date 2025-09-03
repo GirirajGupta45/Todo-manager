@@ -6,7 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 
 @Entity
@@ -14,11 +15,12 @@ public class Todo {
     @Id
     @GeneratedValue
     private int id;
-    @Column(nullable = false)
+   @NotNull(message = "description is required")
+   @Size(min=3, message = "Too small description: min length 3 characters")
     private String description;
     @Column(nullable = false)
     private String username;
-    @Column(nullable = false)
+   @NotNull(message ="Target Date is required")
     private LocalDate targetDate;
     private boolean done;
 

@@ -2,9 +2,11 @@ package com.example.todo.Controllers;
 
 import com.example.todo.Beans.Todo;
 import com.example.todo.Repositories.TodoRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,8 +39,10 @@ public TodoControllerJpa(TodoRepository todoRepository){
     }
 
     @RequestMapping(value="/add-todo", method = RequestMethod.POST)
-    public String addTodo(ModelMap model,Todo todo){
-//    todo.setDone(false);
+    public String addTodo(ModelMap model, @Valid  Todo todo, BindingResult bindingResult){
+      if(bindingResult.hasErrors()){
+          return "addTodo";
+      }
         String username=(String)model.getAttribute("name");
         todo.setUsername(username);
         todoRepository.save(todo);
@@ -60,7 +64,10 @@ public TodoControllerJpa(TodoRepository todoRepository){
         return "todos";
     }
     @RequestMapping(value="/update-todo", method = RequestMethod.POST)
-    public String updateTodo(Model model,Todo todo){
+    public String updateTodo(Model model,@Valid Todo todo,BindingResult bindingResult){
+      if(bindingResult.hasErrors()){
+          return "addTodo";
+      }
         String username=(String)model.getAttribute("name");
         todo.setUsername(username);
         todoRepository.save(todo);
