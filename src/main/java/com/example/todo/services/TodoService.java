@@ -1,6 +1,6 @@
 package com.example.todo.services;
 
-import com.example.todo.Beans.Todo;
+import com.example.todo.Entities.Todo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 

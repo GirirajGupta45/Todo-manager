@@ -1,6 +1,6 @@
 package com.example.todo.Repositories;
 
-import com.example.todo.Beans.Todo;
+import com.example.todo.Entities.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.todo.Controllers;
 
-import com.example.todo.Beans.Todo;
+import com.example.todo.Entities.Todo;
 import com.example.todo.Repositories.TodoRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
