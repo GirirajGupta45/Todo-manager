@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -25,16 +25,16 @@
                         <div class="alert alert-success">You have been logged out successfully.</div>
                     </c:if>
 
-                    <!-- Login Form -->
+                    <!-- ✅ Plain HTML Form (works with Spring Security) -->
                     <form action="${pageContext.request.contextPath}/doLogin" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" id="username" required>
+                            <input type="text" name="username" id="username" class="form-control" required />
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
+                            <input type="password" name="password" id="password" class="form-control" required />
                         </div>
 
                         <button type="submit" class="btn btn-dark w-100">Login</button>

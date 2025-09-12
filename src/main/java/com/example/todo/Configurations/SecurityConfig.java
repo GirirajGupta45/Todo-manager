@@ -4,42 +4,44 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/Welcome", "/login", "/register", "/css/**", "/js/**").permitAll() // allow welcome + login + register
+                        // allow welcome, login, register, static resources
+                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll()
+                        // ignore jsp rendering (important!)
+                        .requestMatchers("/WEB-INF/JSP/**").permitAll()
+                        // everything else must be authenticated
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")                 // your custom login page
-                        .loginProcessingUrl("/doLogin")      // where form submits
-                        .defaultSuccessUrl("/home", true)    // after login
-                        .failureUrl("/Login?error=true")     // on failure
+                        .loginPage("/login")
+                        .loginProcessingUrl("/doLogin")
+                        .defaultSuccessUrl("/todos", true)
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/") // 👈 after logout go back to welcome.jsp
+                        .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
-                );
+                )
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
-
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/JSP/");
-        resolver.setSuffix(".jsp");
-        return resolver;
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

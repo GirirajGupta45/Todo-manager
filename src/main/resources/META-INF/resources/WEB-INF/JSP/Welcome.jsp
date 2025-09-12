@@ -66,8 +66,8 @@
   <div class="container">
     <h1>Welcome to ToDo App ✅</h1>
     <p>Organize your tasks, boost productivity, and never miss a deadline.</p>
-   <%-- <a href="/todos" class="btn">Get Started</a>   --%>
-   <a href="/register" class="btn">Get Started</a>
+    <!-- Direct link to Spring Security login page -->
+    <a href="/login" class="btn">Get Started</a>
   </div>
 </body>
 </html>
