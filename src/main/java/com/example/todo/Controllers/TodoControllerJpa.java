@@ -1,8 +1,11 @@
 package com.example.todo.Controllers;
 
+import com.example.todo.DTOs.UserProfileDTO;
 import com.example.todo.Entities.Todo;
 import com.example.todo.Repositories.TodoRepository;
+import com.example.todo.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,8 +23,11 @@ public class TodoControllerJpa {
 
     private final TodoRepository todoRepository;
 
-    public TodoControllerJpa(TodoRepository todoRepository) {
+    private final UserService userService;
+
+    public TodoControllerJpa(TodoRepository todoRepository, UserService userService) {
         this.todoRepository = todoRepository;
+        this.userService = userService;
     }
 
     // ✅ Utility method to get logged-in username
@@ -35,6 +41,9 @@ public class TodoControllerJpa {
         String username = getLoggedInUsername();
         List<Todo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos", todos);
+
+        UserProfileDTO profile = userService.getProfileByUsername(username);
+        model.addAttribute("profile", profile);
         return "Todos";
     }
 

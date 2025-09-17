@@ -1,5 +1,6 @@
 package com.example.todo.services;
 
+import com.example.todo.DTOs.UserProfileDTO;
 import com.example.todo.DTOs.UserRegistrationDTO;
 import com.example.todo.Entities.User;
 import com.example.todo.Repositories.UserRepository;
@@ -32,4 +33,15 @@ public class UserService {
     }
 
 
+    public UserProfileDTO getProfileByUsername(String username) {
+        User user = userRepository.findByUsernameIgnoreCase(username);
+        if (user==null) {
+            throw new RuntimeException("User not found");
+        }
+
+        UserProfileDTO profile = new UserProfileDTO();
+        profile.setUsername(user.getUsername());
+        profile.setEmail(user.getEmail());
+        return profile;
+    }
 }
