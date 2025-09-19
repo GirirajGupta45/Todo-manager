@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,12 +17,12 @@ public class TodoService {
     public static int todosCount=0;
 
 
-    public void addTodo(String description, String username, LocalDate targetDate, boolean done) {
-        Todo todo = new Todo(++todosCount,description,username,targetDate,done);
+    public void addTodo(String description, String username, LocalDateTime targetDateTime, boolean done) {
+        Todo todo = new Todo(++todosCount,description,username,targetDateTime,done);
         todos.add(todo);
     }
     public void addTodo(Todo todo){
-    addTodo(todo.getDescription(),todo.getUsername(),todo.getTargetDate(),todo.isDone());
+    addTodo(todo.getDescription(),todo.getUsername(),todo.getTargetDateTime(),todo.isDone());
     }
     public List<Todo> findByUserName(String username){
         Predicate<? super Todo> predicate =

@@ -6,6 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Todo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -102,9 +106,20 @@
             <form:errors path="description" cssClass="error"/>
 
             <!-- Due Date -->
-            <form:label path="targetDate">Due Date:</form:label>
-            <form:input path="targetDate" type="date"/>
-            <form:errors path="targetDate" cssClass="error"/>
+          <form:label path="targetDateTime">Due Date & Time:</form:label>
+          <form:input path="targetDateTime" id="targetDateTime" class="form-control"/>
+          <form:errors path="targetDateTime" cssClass="error"/>
+
+          <script>
+            flatpickr("#targetDateTime", {
+                enableTime: true,
+                dateFormat: "d-m-Y H:i",   // dd-mm-yyyy HH:MM
+                time_24hr: true
+            });
+          </script>
+
+           <form:errors path="targetDateTime" cssClass="error"/>
+
             <!-- Mark as Completed -->
             <div style="margin-bottom: 18px; display: flex; align-items: center;">
                 <form:checkbox path="done" id="doneCheckbox" style="width: 18px; height: 18px;"/>

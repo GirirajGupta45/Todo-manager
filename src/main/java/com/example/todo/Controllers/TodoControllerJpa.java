@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +51,7 @@ public class TodoControllerJpa {
     @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
     public String addTodo(ModelMap model) {
         String username = getLoggedInUsername();
-        Todo todo = new Todo(0, "", username, LocalDate.now().plusYears(1), false);
+        Todo todo = new Todo(0, "", username, LocalDateTime.now().plusYears(1), false);
         model.addAttribute("todo", todo);
         return "addTodo";
     }

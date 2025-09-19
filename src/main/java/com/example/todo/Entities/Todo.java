@@ -1,6 +1,7 @@
 package com.example.todo.Entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Todo {
@@ -19,15 +21,18 @@ public class Todo {
     private String description;
     @Column(nullable = false)
     private String username;
-   @NotNull(message ="Target Date is required")
-    private LocalDate targetDate;
+   @NotNull(message ="Target Date Time is required")
+   @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
+   @Column(name = "target_date_time", columnDefinition = "DATETIME")
+    private LocalDateTime targetDateTime;
+
     private boolean done;
 
-    public Todo(int ID, String description, String username, LocalDate targetDate, boolean done) {
+    public Todo(int ID, String description, String username, LocalDateTime targetDateTime, boolean done) {
         this.id = ID;
         this.description = description;
         this.username = username;
-        this.targetDate = targetDate;
+        this.targetDateTime = targetDateTime;
         this.done = done;
     }
 
@@ -59,12 +64,12 @@ public class Todo {
         this.username = username;
     }
 
-    public LocalDate getTargetDate() {
-        return targetDate;
+    public LocalDateTime getTargetDateTime() {
+        return targetDateTime;
     }
 
-    public void setTargetDate(LocalDate targetDate) {
-        this.targetDate = targetDate;
+    public void setTargetDateTime(LocalDateTime targetDateTime) {
+        this.targetDateTime = targetDateTime;
     }
 
     public boolean isDone() {
@@ -81,8 +86,13 @@ public class Todo {
                 "ID=" + id +
                 ", Description='" + description + '\'' +
                 ", Username='" + username + '\'' +
-                ", targetDate=" + targetDate +
+                ", targetDateTime=" + targetDateTime +
                 ", done=" + done +
                 '}';
+    }
+    public String getFormattedTargetDateTime() {
+        if (targetDateTime == null) return "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return targetDateTime.format(formatter);
     }
 }

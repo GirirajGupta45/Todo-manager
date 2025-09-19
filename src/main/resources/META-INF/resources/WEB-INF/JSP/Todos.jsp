@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+
 <html>
 <head>
     <title>Todo App</title>
@@ -58,7 +59,7 @@
         <thead class="table-dark">
             <tr>
                 <th>Description</th>
-                <th>Target Date</th>
+                <th>Due Date & Time</th>
                 <th>Completed?</th>
                 <th>Actions</th>
             </tr>
@@ -67,7 +68,7 @@
             <c:forEach var="todo" items="${todos}">
                 <tr>
                     <td>${todo.description}</td>
-                    <td>${todo.targetDate.toString()}</td>
+                  <td>${todo.formattedTargetDateTime}</td>
                     <td>
                         <c:choose>
                             <c:when test="${todo.done}">✅ Yes</c:when>
