@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,17 +22,21 @@ public class Todo {
     private String description;
     @Column(nullable = false)
     private String username;
+    @NotNull
+    private String category;
    @NotNull(message ="Target Date Time is required")
    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
+   @Future(message = "Target Date & Time must be in the future")
    @Column(name = "target_date_time", columnDefinition = "DATETIME")
     private LocalDateTime targetDateTime;
 
     private boolean done;
 
-    public Todo(int ID, String description, String username, LocalDateTime targetDateTime, boolean done) {
-        this.id = ID;
+    public Todo(int id, String description, String username, String category, LocalDateTime targetDateTime, boolean done) {
+        this.id = id;
         this.description = description;
         this.username = username;
+        this.category = category;
         this.targetDateTime = targetDateTime;
         this.done = done;
     }
@@ -39,16 +44,15 @@ public class Todo {
     public Todo() {
     }
 
-
-
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getDescription() {
+    public  String getDescription() {
         return description;
     }
 
@@ -62,6 +66,14 @@ public class Todo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory( String category) {
+        this.category = category;
     }
 
     public LocalDateTime getTargetDateTime() {
@@ -83,13 +95,15 @@ public class Todo {
     @Override
     public String toString() {
         return "Todo{" +
-                "ID=" + id +
-                ", Description='" + description + '\'' +
-                ", Username='" + username + '\'' +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", username='" + username + '\'' +
+                ", category='" + category + '\'' +
                 ", targetDateTime=" + targetDateTime +
                 ", done=" + done +
                 '}';
     }
+
     public String getFormattedTargetDateTime() {
         if (targetDateTime == null) return "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

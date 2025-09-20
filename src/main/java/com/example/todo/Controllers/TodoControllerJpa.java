@@ -3,6 +3,7 @@ package com.example.todo.Controllers;
 import com.example.todo.DTOs.UserProfileDTO;
 import com.example.todo.Entities.Todo;
 import com.example.todo.Repositories.TodoRepository;
+import com.example.todo.services.TodoService;
 import com.example.todo.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ import java.util.Optional;
 public class TodoControllerJpa {
 
     private final TodoRepository todoRepository;
-
+    private final TodoService todoService;
     private final UserService userService;
 
-    public TodoControllerJpa(TodoRepository todoRepository, UserService userService) {
+    public TodoControllerJpa(TodoRepository todoRepository, TodoService todoService, UserService userService) {
         this.todoRepository = todoRepository;
+        this.todoService = todoService;
         this.userService = userService;
+
     }
 
     // ✅ Utility method to get logged-in username
@@ -51,13 +54,13 @@ public class TodoControllerJpa {
     @RequestMapping(value = "/add-todo", method = RequestMethod.GET)
     public String addTodo(ModelMap model) {
         String username = getLoggedInUsername();
-        Todo todo = new Todo(0, "", username, LocalDateTime.now().plusYears(1), false);
+        Todo todo = new Todo(0, "", username,"", LocalDateTime.now().plusYears(1), false);
         model.addAttribute("todo", todo);
         return "addTodo";
     }
 
     @RequestMapping(value = "/add-todo", method = RequestMethod.POST)
-    public String addTodo(@Valid Todo todo, BindingResult bindingResult) {
+    public String addTodo(@Valid @ModelAttribute("todo") Todo todo, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "addTodo";
         }
@@ -65,6 +68,14 @@ public class TodoControllerJpa {
         todo.setUsername(username);
         todoRepository.save(todo);
         return "redirect:todos";
+    }
+
+    @RequestMapping(value="/filtered-todos",method=RequestMethod.POST)
+    public String showTodosWithFilteres(@RequestParam(required = false) String filterCategory,
+                                        @RequestParam(required = false) String filterStatus,Model model){
+        List<Todo> todos = todoService.getFilteredTodos(getLoggedInUsername(), filterCategory, filterStatus);
+        model.addAttribute("todos", todos);
+        return "Todos";
     }
 
     @RequestMapping("/delete-todo")
