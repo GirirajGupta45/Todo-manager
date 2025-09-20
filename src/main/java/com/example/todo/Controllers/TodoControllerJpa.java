@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,9 +73,24 @@ public class TodoControllerJpa {
 
     @RequestMapping(value="/filtered-todos",method=RequestMethod.POST)
     public String showTodosWithFilteres(@RequestParam(required = false) String filterCategory,
-                                        @RequestParam(required = false) String filterStatus,Model model){
+                                        @RequestParam(required = false) String filterStatus,
+                                        @RequestParam(required = false) String sortOrder,
+                                        Model model){
+
+
         List<Todo> todos = todoService.getFilteredTodos(getLoggedInUsername(), filterCategory, filterStatus);
+
+        if (sortOrder != null && !sortOrder.isEmpty()) {
+            if ("asc".equalsIgnoreCase(sortOrder)) {
+                todos.sort(Comparator.comparing(Todo::getTargetDateTime));
+            } else if ("desc".equalsIgnoreCase(sortOrder)) {
+                todos.sort(Comparator.comparing(Todo::getTargetDateTime).reversed());
+            }
+        }
         model.addAttribute("todos", todos);
+        model.addAttribute("filterCategory", filterCategory);
+        model.addAttribute("filterStatus", filterStatus);
+        model.addAttribute("sortOrder", sortOrder);
         return "Todos";
     }
 
