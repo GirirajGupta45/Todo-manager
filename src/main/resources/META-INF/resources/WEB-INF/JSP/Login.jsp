@@ -4,7 +4,56 @@
 <html>
 <head>
     <title>Login - Todo App</title>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Todo App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+     body {
+         background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+         min-height: 100vh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-family: Arial, sans-serif;
+     }
+
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(6px);
+        }
+
+        h3 {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .btn-dark {
+            background-color: #4facfe;
+            border: none;
+        }
+
+        .btn-dark:hover {
+            background-color: #007bff;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body class="bg-light">
 

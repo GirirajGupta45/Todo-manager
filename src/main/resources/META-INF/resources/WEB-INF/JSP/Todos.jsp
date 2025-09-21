@@ -7,21 +7,39 @@
     <title>Todo App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        .navbar .form-control {
-            width: 280px;
-        }
-     .form-control,btn btn-outline-light ms-2 {
-         margin-top:5px;
-        }
-        .sidebar-label {
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        .sidebar-section {
-            margin-bottom: 15px;
-        }
-    </style>
+   <style>
+          body {
+              /* Full-screen background image */
+              background: url('https://images.unsplash.com/photo-1620912189866-474843ba5c14?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+              background-size: cover;
+              min-height: 100vh;
+              font-family: Arial, sans-serif;
+          }
+
+          .navbar .form-control {
+              width: 280px;
+          }
+
+          .form-control, .btn.btn-outline-light.ms-2 {
+              margin-top: 5px;
+          }
+
+          .sidebar-label {
+              font-weight: 500;
+              margin-bottom: 5px;
+          }
+
+          .sidebar-section {
+              margin-bottom: 15px;
+          }
+
+          /* Optional: slightly dim background for readability */
+          .content-container {
+              background-color: rgba(255, 255, 255, 0.95);
+              padding: 15px;
+              border-radius: 8px;
+          }
+      </style>
 </head>
 <body>
 

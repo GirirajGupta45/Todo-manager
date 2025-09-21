@@ -8,7 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        body { background: #f5f7fa; }
+   body {
+                    background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+                    min-height: 100vh;
+                    font-family: Arial, sans-serif;
+                }
         .card { border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .hidden-section { display: none; }
     </style>

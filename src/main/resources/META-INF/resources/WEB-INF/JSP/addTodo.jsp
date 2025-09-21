@@ -10,90 +10,104 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 70vh;
-        }
+    <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+    <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Todo</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-        .todo-form {
-            background-color: #fff;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            max-width: 450px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                /* Background image */
+                background: url('https://images.unsplash.com/photo-1578852612716-854e527abf2e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGFza3xlbnwwfHwwfHx8Mg%3D%3D') no-repeat center center fixed;
+                background-size: cover;
+                min-height: 70vh;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start; /* shift form slightly down */
+                padding-top: 60px; /* additional downward shift */
+            }
 
-        .todo-form h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-            font-weight: 600;
-        }
+            .todo-form {
+                background-color: rgba(255, 255, 255, 0.95); /* slightly transparent for background visibility */
+                padding: 20px 30px;
+                border-radius: 10px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+                max-width: 450px;
+                width: 100%;
+                box-sizing: border-box;
+            }
 
-        .todo-form label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #555;
-        }
+            .todo-form h2 {
+                text-align: center;
+                margin-bottom: 25px;
+                color: #333;
+                font-weight: 600;
+            }
 
-        .todo-form input,
-        .todo-form textarea,
-        .todo-form select {
-            width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 18px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 1em;
-            box-sizing: border-box;
-        }
+            .todo-form label {
+                display: block;
+                margin-bottom: 6px;
+                font-weight: 500;
+                color: #555;
+            }
 
-        .todo-form textarea {
-            resize: vertical;
-        }
+            .todo-form input,
+            .todo-form textarea,
+            .todo-form select {
+                width: 100%;
+                padding: 10px 12px;
+                margin-bottom: 18px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                font-size: 1em;
+                box-sizing: border-box;
+            }
 
-        .todo-form button {
-            width: 100%;
-            padding: 12px 0;
-            background-color: #28a745;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            font-size: 1em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+            .todo-form textarea {
+                resize: vertical;
+            }
 
-        .todo-form button:hover {
-            background-color: #218838;
-        }
+            .todo-form button {
+                width: 100%;
+                padding: 12px 0;
+                background-color: #28a745;
+                border: none;
+                color: white;
+                border-radius: 6px;
+                font-size: 1em;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
 
-        .checkbox-group {
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+            .todo-form button:hover {
+                background-color: #218838;
+            }
 
-        .error {
-            color: red;
-            font-size: 0.85em;
-            margin-top: -12px;
-            margin-bottom: 12px;
-            display: block;
-        }
-    </style>
+            .checkbox-group {
+                margin-bottom: 18px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .error {
+                color: red;
+                font-size: 0.85em;
+                margin-top: -12px;
+                margin-bottom: 12px;
+                display: block;
+            }
+        </style>
 </head>
 <body>
     <div class="todo-form">
